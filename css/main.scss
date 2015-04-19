@@ -1,0 +1,655 @@
+﻿$c0 : #c0c0c0;
+$c5 : #e9e9e9;
+
+$c6 : #616161;
+$c20 : #666666;
+
+
+$c19 : #fb8e45;
+$c3 : #ff6580;
+$c8 : #ff0000;
+
+
+$c9 : #f5f5f5;
+$c2 : #ffffff;
+$c7 : #f0f0f0;
+$c10 : #f7f7f7;
+
+
+$c18 : #8ab4ca;
+$c1 : #007eff;
+$c11 : #d9edf7;
+$c12 : #3a87ad;
+$c13 : #bce8f1;
+$c14 : #cce4f0;
+
+
+$c4 : #53c261;
+$c15 : #dff0d8;
+$c16 : #468847;
+$c17 : #c5f0c2;
+
+
+
+@mixin setTextShadow($x, $y, $blur, $color) {
+  -moz-text-shadow: #{$x}px #{$y}px #{$blur}px $color;
+  -webkit-text-shadow: #{$x}px #{$y}px #{$blur}px $color;
+  text-shadow: #{$x}px #{$y}px #{$blur}px $color;
+}
+
+@mixin setBoxShadowWithInset($x, $y, $blur, $color, $xInset, $yInset, $blurInset, $colorInset) {
+  -moz-box-shadow: #{$x}px #{$y}px #{$blur}px $color,
+                    inset #{$xInset}px #{$yInset}px #{$blurInset}px $colorInset;
+
+  -webkit-box-shadow: #{$x}px #{$y}px #{$blur}px $color,
+                    inset #{$xInset}px #{$yInset}px #{$blurInset}px $colorInset;
+
+  box-shadow: #{$x}px #{$y}px #{$blur}px $color,
+                    inset #{$xInset}px #{$yInset}px #{$blurInset}px $colorInset;
+}
+
+@mixin deepFont {
+  font-weight: bold;
+  color: $c6;
+  @include setTextShadow(0, 1, 0, $c2);
+  font-size: .9em;
+}
+
+@mixin blueBox {
+  background-color: $c11;
+  color: $c12;
+  border: 1px solid $c13;
+  @include setTextShadow(0, 1, 0, $c14);
+}
+
+@mixin greenBox {
+  background-color: $c15;
+  color: $c16;
+  border: 1px solid $c17;
+  @include setTextShadow(0, 1, 0, $c14);
+}
+
+@mixin unsetBoxShadow {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+@mixin setTransition($time, $effect) {
+  transition: #{$time}ms $effect;
+  -webkit-transition: #{$time}ms $effect;
+  -moz-transition: #{$time}ms $effect;
+  -o-transition: #{$time}ms $effect;
+  -ms-transition: #{$time}ms $effect;
+}
+
+@mixin setBorderRadius($radius) {
+  -webkit-border-radius: #{$radius}px;
+  -moz-border-radius: #{$radius}px;
+  border-radius: #{$radius}px;
+}
+
+@mixin setBorderRadiusMix($leftTop, $rightTop, $rightBottom, $leftBottom) {
+  -webkit-border-radius: #{$leftTop}px #{$rightTop}px #{$rightBottom}px #{$leftBottom}px;
+  -moz-border-radius: #{$leftTop}px #{$rightTop}px #{$rightBottom}px #{$leftBottom}px;
+  border-radius: #{$leftTop}px #{$rightTop}px #{$rightBottom}px #{$leftBottom}px;
+}
+
+@mixin setLinearGradient($direction, $firstColor, $secondColor) {
+  background-image: -webkit-linear-gradient($direction, $firstColor, $secondColor); /* For Chrome and Safari */
+  background-image: -moz-linear-gradient($direction, $firstColor, $secondColor); /* For old Fx (3.6 to 15) */
+  background-image: -ms-linear-gradient($direction, $firstColor, $secondColor); /* For pre-releases of IE 10*/
+  background-image:  -o-linear-gradient($direction, $firstColor, $secondColor); /* For old Opera (11.1 to 12.0) */
+}
+
+@mixin buttonStyle {
+  @include setBorderRadius(3);
+  border: solid 1px $c0;
+  background-color: $c5;
+  @include setBoxShadowWithInset(0, 1, 3, $c18, 0, 1, 0, $c2);
+  font-size: .875em;
+  font-weight: bold;
+  text-decoration: none;
+  color: $c6;
+  text-shadow: 0 1px 0 $c2;
+
+  background-color: $c10; /* fallback color if gradients are not supported */
+  @include setLinearGradient(top, $c10, $c5);
+  background-image: linear-gradient(to bottom, $c10, $c5); /* Standard syntax; must be last */
+
+  &:hover {
+    cursor: pointer;
+    background-color: $c2; /* fallback color if gradients are not supported */
+    @include setLinearGradient(top, $c2, $c7);
+    background-image: linear-gradient(to top, $c2, $c7); /* Standard syntax; must be last */
+    color: $c6; // To override the global <a> hover color
+  }
+}
+
+@mixin rotate($degree) {
+  -moz-transform: rotate(#{$degree}deg);
+  -webkit-transform: rotate(#{$degree}deg);
+  transform: rotate(#{$degree}deg);
+}
+
+@mixin setInnerBoxShadow($x, $y, $blur, $color) {
+  -moz-box-shadow: inset #{$x}px #{$y}px #{$blur}px $color;
+  -webkit-box-shadow: inset #{$x}px #{$y}px #{$blur}px $color;
+  box-shadow: inset #{$x}px #{$y}px #{$blur}px $color;
+}
+
+@mixin setBoxShadow($x, $y, $blur, $color) {
+  -moz-box-shadow: #{$x}px #{$y}px #{$blur}px $color;
+  -webkit-box-shadow: #{$x}px #{$y}px #{$blur}px $color;
+  box-shadow: #{$x}px #{$y}px #{$blur}px $color;
+}
+
+body {
+  font: bold 14px Arial, Tahoma;
+  margin: 0 auto; width: 1200px;
+}
+
+input[type="submit"] {
+  @include buttonStyle;
+  width: 100px;
+  height: 30px;
+}
+
+input:not([type="submit"]) {
+  font-family: Arial, Tahoma;
+  @include setTransition(0.3, ease);
+  border: 1px solid $c0;
+  @include setBorderRadius(3);
+  padding: 3px;
+  margin: 0;
+}
+
+input:not([type="submit"]):focus {
+  outline: none; /* To disable default glow */
+
+  &.neutral {
+    @include setBoxShadow(0 ,0 ,5 ,$c1);
+  }
+
+  &.invalid {
+    @include setBoxShadow(0 ,0 ,5 , $c3);
+  }
+
+  &.valid {
+    @include setBoxShadow(0 ,0 ,5 ,$c4);
+  }
+}
+
+img {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+label {
+  @include buttonStyle;
+  @include unsetBoxShadow;
+  height: 15px;
+  line-height: 15px;
+  position: relative;
+  text-align: center;
+  top: -15px;
+  padding: 5px;
+  @include setBoxShadowWithInset(0, 1, 0, $c18, 0, 1, 0, $c2);
+
+  &:after {
+    @include buttonStyle;
+    border-top: none;
+    border-left: none;
+    content:'';
+    position:absolute;
+    bottom: -3.5px; right: 50%; margin-right: -2.5px;
+    width: 5px; height: 5px;
+    @include rotate(45);
+    @include setBorderRadius(0);
+    @include unsetBoxShadow;
+  }
+}
+
+
+div.singleMessage {
+  @include setBorderRadius(4);
+  position: relative;
+  padding: 15px;
+  clear: both;
+  margin-bottom: 10px;
+  word-break: break-all;
+  white-space: pre-line;
+
+  &:after {
+    content:'';
+    position: absolute;
+    bottom: 50%;
+    width: 10px; height: 10px;
+    margin-bottom: -5px;
+    @include rotate(45);
+  }
+
+  &.right:after {
+    @include blueBox;
+    border-left: none;
+    border-bottom: none;
+    right: -7px;
+  }
+
+  &.left:after {
+    @include greenBox;
+    border-right: none;
+    border-top: none;
+    left: -7px;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  @include deepFont;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:nth-child(odd) {
+    background-color: $c7;
+  }
+}
+
+td {
+  padding: 15px 20px;
+
+  &.rookie {
+    border-right: 4px solid $c1;
+  }
+
+  &.disabled {
+    border-right: 4px solid $c3;
+  }
+}
+
+h1, h2, h3 {
+  display: none;
+}
+
+#errorParagraph {
+  display: none;
+  position: relative;
+  width: 450px;
+  background-color: $c3;
+  border: 1px solid $c8;
+  margin: 0 auto;
+  padding: 5px;
+  text-align: center;
+  color: $c2;
+  @include setBorderRadiusMix(0, 0, 5, 5);
+}
+
+#closeErrorParagraph {
+  @include setBorderRadius(8);
+  @include deepFont;
+  padding: 0 4px 2.5px;
+  position: absolute;
+  color: $c2;
+  right: -6px; top: 16px;
+  background-color: $c6;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#mainUserSelection, #mainNickContainer {
+  margin: 10px auto;
+  @include setBorderRadius(4);
+  border: 1px solid $c7;
+  background-color: $c9;
+}
+
+#mainUserSelection {
+  width: 160px;
+  padding: 0;
+  @include deepFont;
+
+  ul {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+
+  li {
+    position: relative;
+    padding-right: 20px;
+    line-height: 50px;
+    height: 50px;
+    border-bottom: 1px solid $c3;
+    @include setTransition(150, ease);
+
+    &:last-of-type {
+      border: 0;
+    }
+
+    &:hover {
+      color: $c2;
+      background-color: $c3;
+      border-color: $c3;
+      cursor: pointer;
+    }
+
+    &:hover span {
+      background-color: $c6;
+    }
+  }
+
+  span {
+    height: 15px;
+    line-height: 15px;
+    @include setBorderRadius(8);
+    padding: 0 4px 2.5px;
+    position: absolute;
+    color: $c2;
+    left: 10px; top: 15px;
+    background-color: $c3;
+  }
+}
+
+#mainNickContainer {
+  width: 150px;
+  text-align: center;
+  padding: 24px 5px 5px;
+  position: relative;
+
+  input[type="text"] {
+    width: 142px;
+    display: block;
+
+    &:first-of-type {
+      margin-bottom: 35px;
+    }
+
+    &:last-of-type {
+      text-align: center;
+    }
+  }
+
+  input[type="submit"] {
+    width: 142px;
+    margin: 0;
+  }
+}
+
+#usCode {
+  text-align: center;
+}
+
+#newCodeButton {
+  position: absolute;
+  left: 3px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#communicationSection {
+  position: relative;
+  float: right;
+  width: 720px;
+  padding: 15px 15px 100px;
+  background-color: $c9;
+  @include setBorderRadius(4);
+  border: 1px solid $c7;
+
+  // There is no mixin with spread option.
+  -moz-box-shadow: 5px 0 3px -5px $c6;
+  -webkit-box-shadow: 5px 0 3px -5px $c6;
+  box-shadow: 5px 0 3px -5px $c6;
+
+}
+
+#addMessageForm {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  width: 695px;
+
+  input:not([type="submit"]) {
+    padding: 10px;
+    float: right;
+    resize: none;
+    font-size: 1.15em;
+    font-weight: bold;
+    width: 590px;
+  }
+
+  input[type="submit"] {
+    height: 40px;
+    width: 80px;
+    float: left;
+  }
+}
+
+#loggedSection {
+  float: left;
+  width: 250px;
+  background-color: $c9;
+  @include setBorderRadius(4);
+  border: 1px solid $c7;
+}
+
+#mainChatContainer {
+  width: 1024px;
+  position: relative;
+  margin: 10px auto;
+  z-index: 0;
+}
+
+#messagesContainer {
+  /* The padding-left/right are used because overflow-x: hidden;, overflow-x: hidden is used to make sure there will never
+   * be an horizontal scroll bar, there should not be any horizontal scroll bar due to the left/right padding but I add
+   * overflow-x: hidden; just to be sure, I'm using overflow: auto; to override any inherited overflow-x/y values, and finally
+   * I override the overflow-x: auto; with overflow-x hidden.
+   * */
+  overflow: auto;
+  overflow-x: hidden;
+  padding-right: 9px;
+  padding-left: 9px;
+}
+
+#currentRoom {
+  &:before {
+    color: $c2;
+    content: '\2191';
+    display: block;
+    width: 45px;
+    height: 50px;
+    background-color: $c1;
+    position: absolute;
+    top: 30px;
+  }
+
+  &:hover:before {
+    background-color: $c4;
+  }
+}
+
+#newRoomDiv, #newInvitationDiv, #newKickDiv, #newRoomDeletionDiv, #newUserDeletionDiv {
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  display: none;
+  opacity: 0;
+  background-color: $c2;
+  width: 300px;
+  position: fixed;
+  top: 150px;
+  right: 50%;
+  margin-right: -200px;
+  z-index: 1;
+  border: 2px solid $c1;
+
+  label {
+    border: 0;
+    background: none; // I need to remove the all background(background-color + background-image).
+    text-shadow: none;
+    position: static;
+    padding: 0;
+    @include unsetBoxShadow;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  p {
+    color: $c1;
+    margin: 0;
+    float: right;
+
+    span {
+      color: $c4;
+    }
+  }
+}
+
+#userToInvite {
+  font-family: Arial, Tahoma;
+}
+
+#newInvitationDiv p  {
+  margin-right: 30px;
+  font-size: 0.8em;
+}
+
+#newKickDiv p, #newRoomDiv p, #newRoomDeletionDiv p, #newUserDeletionDiv p {
+  margin-right: 60px;
+}
+
+#roomDeletionForm, #invitationForm {
+  float: right;
+
+  label {
+    margin-right: 60px;
+  }
+}
+
+#newRoomForm label {
+  margin-right: 50px;
+}
+
+#cancelRoomDiv, #approveRoomDiv,
+#cancelInvitationDiv, #approveInvitationDiv,
+#cancelKickDiv,#approveKickDiv,
+#cancelRoomDeletionDiv, #approveRoomDeletionDiv,
+#cancelUserDeletionDiv, #approveUserDeletionDiv {
+  opacity: 0.7;
+  float: right;
+  font-size: 1.3em;
+  color: $c2;
+  background-color: $c1;
+  width: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#approveRoomDiv, #approveInvitationDiv, #approveKickDiv, #approveRoomDeletionDiv, #approveUserDeletionDiv {
+  margin-right: 270px;
+  margin-top: -30px;
+}
+
+#roomsList {
+  @include deepFont;
+  position: absolute;
+  top: 0; right: -55px;
+  z-index: -1;
+
+  div {
+    background-color: $c9;
+    position: relative;
+    top: 5px; left: -30px;
+    width: 45px; height: 70px;
+    @include rotate(45);
+    text-align: center;
+    padding-top: 10px;
+    @include setTransition(150, ease);
+
+
+    &:hover
+    {
+      cursor: pointer;
+      left: -25px;
+      top: 0;
+    }
+  }
+
+
+
+  .native {
+    border-top: 4px solid $c4;
+  }
+
+  .own {
+    border-top: 4px solid $c19;
+
+    &.withInviteOption:after {
+      content: '\002B';
+      display: block;
+      width: 45px;
+      height: 20px;
+      background-color: $c1;
+      position: absolute;
+      top: -27px;
+      color: #fff;
+    }
+
+    &.withInviteOption:hover:after {
+      background-color: $c4;
+    }
+  }
+
+  .invited {
+    border-top: 4px solid $c3;
+  }
+}
+
+
+
+.singleMessage.right {
+  @include blueBox;
+  float: right;
+}
+
+.singleMessage.left {
+  @include greenBox;
+  float: left;
+}
+
+.sendBy {
+  float: left;
+  color: $c1;
+}
+
+.kick {
+  font-size: 1.5em;
+  @include setBorderRadius(20);
+  border-right: 3px solid $c1;
+  padding: 3px;
+  text-align: center;
+}
+
+.clearFix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.header {
+  font-family: 'Poiret One',cursive,serif;
+  font-size: 50px;
+  color: $c20;
+}

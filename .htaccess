@@ -1,0 +1,55 @@
+# PHP error handling for production servers
+
+# disable display of startup errors
+php_flag display_startup_errors off
+
+# disable display of all other errors
+php_flag display_errors off
+
+# disable html markup of errors
+php_flag html_errors off
+
+# enable logging of errors
+php_flag log_errors on
+
+# disable ignoring of repeat errors
+php_flag ignore_repeated_errors off
+
+# disable ignoring of unique source errors
+php_flag ignore_repeated_source off
+
+# enable logging of php memory leaks
+php_flag report_memleaks on
+
+# preserve most recent error via php_errormsg
+php_flag track_errors on
+
+# disable formatting of error reference links
+php_value docref_root 0
+
+# disable formatting of error reference links
+php_value docref_ext 0
+
+# specify path to php error log
+# If you supply just the log file name, the file name will be created for each error within the folder where the file that
+# generated the error exists, for example if captcha.php will throw an error, php_errors_log.log will be created within the
+# root folder, but if the config.php within the php folder will generate an error, php_errors_log.log will be created and
+# placed within the php directory, if you DON'T want this behavior you should use FULL PATH
+php_value error_log FULL PATH/RELATIVE PATH
+
+# specify recording of all php errors
+php_value error_reporting -1
+
+# disable max error string length
+php_value log_errors_max_len 0
+
+# protect error log by preventing public access, insert the name of the errors log file, you don't have to use full path
+# to prevent access when the file is placed in different locations as decribed above(when using relative path), JUST
+# USE THE ERRORS LOG FILE NAME
+<Files ERRORS_LOG_FILENAME>
+ Order allow,deny
+ Deny from all
+
+ # Satisfy mabye needed in the future when I use authentication for more info: http://wiki.apache.org/httpd/BypassAuthenticationOrAuthorizationRequirements
+ Satisfy All
+</Files>
