@@ -1,4 +1,4 @@
-﻿CREATE TABLE `messages` (
+CREATE TABLE `messages` (
   `mes_id` int(11) NOT NULL AUTO_INCREMENT,
   `mes_send_by_id` int(11) DEFAULT NULL,
   `mes_content` text,
