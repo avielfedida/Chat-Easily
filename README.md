@@ -1,4 +1,7 @@
-# chat-easily
+<p align="center">
+	<img height="195" width="226" src="http://imagizer.imageshack.us/a/img661/8906/gO0XEe.png">
+</p>
+
 > Easy to configure php + javascript chat.
 
 ## Installation
@@ -25,6 +28,10 @@ within your `.htaccess` file.
 1. The `fonts` folder contains captcha fonts, I included only 1 basic font, but you can add more, each captcha refresh may choose different font.
 
 2. Supports IE10+
+
+## Contact
+
+Feel free to contact me at `avielfedida@gmail.com`.
 
 ###### Version: `1.0`
 
