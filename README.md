@@ -2,6 +2,8 @@
 	<img height="195" width="226" src="http://i.imgur.com/oQfqxiw.png">
 </p>
 
+---
+
 > Easy to configure php + javascript chat.
 
 ## Installation
